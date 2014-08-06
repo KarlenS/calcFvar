@@ -3,6 +3,9 @@
 import numpy as np
 
 filename = "lcdata_420_1TeV.txt"
+#filename = "lcdata_1TeV.txt"
+#filename = "ratio.txt"
+#filename = "index.txt"
 
 mjd,flux,fluxerr = np.loadtxt(filename,unpack=True)
 
@@ -15,11 +18,11 @@ N = flux.size
 fluxerr_sq = fluxerr**2
 mse = fluxerr_sq.mean()
 
-print lc_std**2.
-print lc_mean**2.
-print mse
+#print lc_std**2.
+#print lc_mean**2.
+#print mse
 
-Fvar = ((lc_std**2. - mse)/lc_mean**2.)**0.5
+Fvar = (abs((lc_std**2. - mse)/lc_mean**2.))**0.5
 
 Fvar_err = (Fvar**2. + (2.*mse**2./(N*lc_mean**4.) + 4.*mse*Fvar**2./(N*lc_mean**2.))**0.5)**0.5 - Fvar
 
